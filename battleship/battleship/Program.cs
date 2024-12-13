@@ -87,29 +87,26 @@ namespace battleship
             if (verHor == "H")
             {
 
-                for (int i = 0; i < shipLength - 1; i++)
-                {
-                    if (yourArray[x + i, y] != "* ")
-                    {
-                        return false;
-                    }
-                    else
-                        return true;
-                }
-            }
-            else
-            {
-                for (int i = 0; i < shipLength - 1; i++)
+                for (int i = 0; i < shipLength; i++)
                 {
                     if (yourArray[x, y + i] != "* ")
                     {
                         return false;
                     }
-                    else
-                        return true;
                 }
+                return true;
             }
-            return false;
+            else
+            {
+                for (int i = 0; i < shipLength; i++)
+                {
+                    if (yourArray[x+ i, y] != "* ")
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
         }
 
 
@@ -152,7 +149,7 @@ namespace battleship
 
                 if (pcOrientation == 1)
                 {
-                    if (pcX + 1 < Global.pcArray.GetLength(1)-1)
+                    if (pcX + 1 < Global.pcArray.GetLength(1) - 1)
                     {
                         for (int i = 0; i < 2; i++)
                             Global.pcArray[pcX + i, pcY] = "T ";
@@ -212,7 +209,7 @@ namespace battleship
             {
                 if (pcOrientation == 1)
                 {
-                    if (pcX + 1 < Global.pcArray.GetLength(1) - 1 && pcX + 2 < Global.pcArray.GetLength(1)-1 && pcX + 3 < Global.pcArray.GetLength(1) - 1)
+                    if (pcX + 1 < Global.pcArray.GetLength(1) - 1 && pcX + 2 < Global.pcArray.GetLength(1) - 1 && pcX + 3 < Global.pcArray.GetLength(1) - 1)
                     {
                         for (int i = 0; i < 4; i++)
                             Global.pcArray[pcX + i, pcY] = "B ";
@@ -226,7 +223,7 @@ namespace battleship
                 }
                 else
                 {
-                    if (pcY + 1 < Global.pcArray.GetLength(1) - 1 && pcY + 2 < Global.pcArray.GetLength(1)-1 && pcY + 3 < Global.pcArray.GetLength(1) - 1)
+                    if (pcY + 1 < Global.pcArray.GetLength(1) - 1 && pcY + 2 < Global.pcArray.GetLength(1) - 1 && pcY + 3 < Global.pcArray.GetLength(1) - 1)
                     {
                         for (int i = 0; i < 4; i++)
                             Global.pcArray[pcX, pcY + i] = "B ";
@@ -272,7 +269,7 @@ namespace battleship
             {
                 if (pcOrientation == 1)
                 {
-                    if (pcX + 1 < Global.pcArray.GetLength(1) - 1 && pcX + 2 < Global.pcArray.GetLength(1) -1 && pcX + 3 < Global.pcArray.GetLength(1) - 1 && pcX + 4 < Global.pcArray.GetLength(1)-1)
+                    if (pcX + 1 < Global.pcArray.GetLength(1) - 1 && pcX + 2 < Global.pcArray.GetLength(1) - 1 && pcX + 3 < Global.pcArray.GetLength(1) - 1 && pcX + 4 < Global.pcArray.GetLength(1) - 1)
                     {
                         for (int i = 0; i < 5; i++)
                             Global.pcArray[pcX + i, pcY] = "L ";
@@ -286,7 +283,7 @@ namespace battleship
                 }
                 else
                 {
-                    if (pcY + 1 < Global.pcArray.GetLength(1)- 1 && pcY + 2 < Global.pcArray.GetLength(1) - 1 && pcY + 3 < Global.pcArray.GetLength(1) - 1 && pcY + 4 < Global.pcArray.GetLength(1)-1)
+                    if (pcY + 1 < Global.pcArray.GetLength(1) - 1 && pcY + 2 < Global.pcArray.GetLength(1) - 1 && pcY + 3 < Global.pcArray.GetLength(1) - 1 && pcY + 4 < Global.pcArray.GetLength(1) - 1)
                     {
                         for (int i = 0; i < 5; i++)
                             Global.pcArray[pcX, pcY + i] = "L ";
@@ -332,7 +329,7 @@ namespace battleship
             {
                 if (pcOrientation == 1)
                 {
-                    if (pcX + 1 < Global.pcArray.GetLength(1)-1 && pcX + 2 < Global.pcArray.GetLength(1) - 1)
+                    if (pcX + 1 < Global.pcArray.GetLength(1) - 1 && pcX + 2 < Global.pcArray.GetLength(1) - 1)
                     {
                         for (int i = 0; i < 3; i++)
                             Global.pcArray[pcX + i, pcY] = "K ";
@@ -346,7 +343,7 @@ namespace battleship
                 }
                 else
                 {
-                    if (pcY + 1 < Global.pcArray.GetLength(1) - 1 && pcY + 2 < Global.pcArray.GetLength(1)-1)
+                    if (pcY + 1 < Global.pcArray.GetLength(1) - 1 && pcY + 2 < Global.pcArray.GetLength(1) - 1)
                     {
                         for (int i = 0; i < 3; i++)
                             Global.pcArray[pcX, pcY + i] = "K ";
@@ -389,10 +386,10 @@ namespace battleship
             }
             pcShipInField = false;
             while (!pcShipInField)
-            { 
+            {
                 if (pcOrientation == 1)
                 {
-                    if (pcX + 1 < Global.pcArray.GetLength(1)-1 && pcX + 2 < Global.pcArray.GetLength(1) - 1)
+                    if (pcX + 1 < Global.pcArray.GetLength(1) - 1 && pcX + 2 < Global.pcArray.GetLength(1) - 1)
                     {
                         for (int i = 0; i < 3; i++)
                             Global.pcArray[pcX + i, pcY] = "P ";
@@ -406,7 +403,7 @@ namespace battleship
                 }
                 else
                 {
-                    if (pcY + 1 < Global.pcArray.GetLength(1)-1 && pcY + 2 < Global.pcArray.GetLength(1) - 1)
+                    if (pcY + 1 < Global.pcArray.GetLength(1) - 1 && pcY + 2 < Global.pcArray.GetLength(1) - 1)
                     {
                         for (int i = 0; i < 3; i++)
                             Global.pcArray[pcX, pcY + i] = "P ";
@@ -421,274 +418,274 @@ namespace battleship
             }
         }
 
-            static int WriteX()        //umoznuje uziveteli vypsat souradnice zadane lode
-            {
-                Console.WriteLine("zadejte souradnice radku (A-J)");
-
-                string x = Convert.ToString(Console.ReadLine());
-                while (!Global.yRows.Contains(x))
-                {
-                    Console.WriteLine("uvadejte velka pismena od A do J");
-                    x = Convert.ToString(Console.ReadLine());
-                }
-                int index = Global.yRows.IndexOf(x);
-                return index;
-            }
-
-            static int WriteY()            //umoznuje uziveteli vypsat souradnice zadane lode
-            {
-                Console.WriteLine("zadejte souradnice sloupce (1-10)");
-                int y;
-                while (!int.TryParse(Console.ReadLine(), out y))
-                {
-                    Console.WriteLine("uvadejte cisla od 1 do 10");
-                }
-                while (!Global.yColumns.Contains(y))
-                {
-                    Console.WriteLine("uvadejte cisla od 1 do 10");
-                    y = int.Parse(Console.ReadLine());
-                }
-                return y;
-            }
-            static void ShipLayout()           //vypisovani lodi do pole
-            {
-                bool shipInField = false;
-
-                Console.WriteLine("Zadejte typ lode: L-letadlova, K-kriznik, T-torpedoborec, B-bitevni, P-ponorka");
-                string type = Console.ReadLine();
-                while (type != "L" && type != "K" && type != "T" && type != "B" && type != "P")         //overeni vstupu
-                {
-                    Console.WriteLine("zadavejte velka pocatecni pismena lodi: L, K, T, B nebo P");
-                    type = Console.ReadLine();
-                }
-                while (type == "L" && Global.letadlova == 1 || type == "K" && Global.kriznik == 1 || type == "T" && Global.torpedoborec == 1 || type == "B" && Global.battleship == 1 || type == "P" && Global.ponorka == 1)
-                {
-                    Console.WriteLine("Kazdou lod muzete zadat jen jednou");        //overeni, ze je kazda lod jen jednou
-                    type = Console.ReadLine();
-                }
-
-                Console.WriteLine("Zadejte, jak chcete lod umistit: H-horizontalne nebo V-vertikalne");
-                string orientation = Console.ReadLine();
-                while (orientation != "H" && orientation != "V")        //overeni vstupu
-                {
-                    Console.WriteLine("zadavejte velka pocatecni pismena orientaci: H nebo V");
-                    orientation = Console.ReadLine();
-                }
-                while (!shipInField)        //overeni, aby byla zadana lod v hranicich pole
-                {
-                    int index = WriteX();
-                    int y = WriteY();
-                    bool correctPosition = true;
-
-
-                    if (type == "T")        //vypisuje jednotive typy lodi + vola funkci na kontrolovani prekryvani
-                    {
-                        correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.torpedoborecLength);
-                        while (!correctPosition)
-                        {
-                            Console.WriteLine("Lod se sem nevejde");
-                            index = WriteX();
-                            y = WriteY();
-                            correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.torpedoborecLength);
-                        }
-
-                        if (orientation == "V")
-                        {
-                            if (index + 1 > Global.playerArray.GetLength(1))
-                            {
-                                Console.WriteLine("Lod se nevejde do pole");
-                            }
-                            else
-                            {
-                                for (int i = 0; i < 2; i++)
-                                    Global.playerArray[index + i, y - 1] = "T ";
-                                Global.torpedoborec = 1;
-                                shipInField = true;
-                            }
-
-                        }
-                        else
-                        {
-                            if (y + 1 > Global.playerArray.GetLength(0))
-                            {
-                                Console.WriteLine("Lod se nevejde do pole");
-                            }
-                            else
-                            {
-                                for (int i = 0; i < 2; i++)
-                                    Global.playerArray[index, y - 1 + i] = "T ";
-                                Global.torpedoborec = 1;
-                                shipInField = true;
-                            }
-
-                        }
-                    }
-                    else if (type == "B")
-                    {
-                        correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.battleshipLength);
-                        while (!correctPosition)
-                        {
-                            Console.WriteLine("Lod se sem nevejde");
-                            index = WriteX();
-                            y = WriteY();
-                            correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.battleshipLength);
-                        }
-                        if (orientation == "V")
-                        {
-                            if (index + 1 > Global.playerArray.GetLength(1) || index + 2 > Global.playerArray.GetLength(1) || index + 3 > Global.playerArray.GetLength(1))
-                            {
-                                Console.WriteLine("Lod se nevejde do pole");
-                            }
-                            else
-                            {
-                                for (int i = 0; i < 4; i++)
-                                    Global.playerArray[index + i, y - 1] = "B ";
-                                Global.battleship = 1;
-                                shipInField = true;
-                            }
-                        }
-                        else
-                        {
-                            if (y + 1 > Global.playerArray.GetLength(1) || y + 2 > Global.playerArray.GetLength(1) || y + 3 > Global.playerArray.GetLength(1))
-                            {
-                                Console.WriteLine("Lod se nevejde do pole");
-                            }
-                            else
-                            {
-                                for (int i = 0; i < 4; i++)
-                                    Global.playerArray[index, y - 1 + i] = "B ";
-                                Global.battleship = 1;
-                                shipInField = true;
-                            }
-                        }
-                    }
-                    else if (type == "L")
-                    {
-                        correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.letadlovaLength);
-                        while (!correctPosition)
-                        {
-                            Console.WriteLine("Lod se sem nevejde");
-                            index = WriteX();
-                            y = WriteY();
-                            correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.letadlovaLength);
-                        }
-                        if (orientation == "V")
-                        {
-                            if (index + 1 > Global.playerArray.GetLength(1) || index + 2 > Global.playerArray.GetLength(1) || index + 3 > Global.playerArray.GetLength(1) || index + 4 > Global.playerArray.GetLength(1))
-                            {
-                                Console.WriteLine("Lod se nevejde do pole");
-                            }
-                            else
-                            {
-                                for (int i = 0; i < 5; i++)
-                                    Global.playerArray[index + i, y - 1] = "L ";
-                                Global.letadlova = 1;
-                                shipInField = true;
-                            }
-
-                        }
-                        else
-                        {
-                            if (y + 1 > Global.playerArray.GetLength(1) || y + 2 > Global.playerArray.GetLength(1) || y + 3 > Global.playerArray.GetLength(1) || y + 4 > Global.playerArray.GetLength(1))
-                            {
-                                Console.WriteLine("Lod se nevejde do pole");
-                            }
-                            else
-                            {
-                                for (int i = 0; i < 5; i++)
-                                    Global.playerArray[index, y - 1 + i] = "L ";
-                                Global.letadlova = 1;
-                                shipInField = true;
-                            }
-                        }
-                    }
-                    else if (type == "K")
-                    {
-
-                        correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.kriznikLength);
-                        while (!correctPosition)
-                        {
-                            Console.WriteLine("Lod se sem nevejde");
-                            index = WriteX();
-                            y = WriteY();
-                            correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.kriznikLength);
-                        }
-                        if (orientation == "V")
-                        {
-                            if (index + 1 > Global.playerArray.GetLength(1) || index + 2 > Global.playerArray.GetLength(1))
-                            {
-                                Console.WriteLine("Lod se nevejde do pole");
-                            }
-                            else
-                            {
-                                for (int i = 0; i < 3; i++)
-                                    Global.playerArray[index + i, y - 1] = "K ";
-                                Global.kriznik = 1;
-                                shipInField = true;
-                            }
-                        }
-                        else
-                        {
-                            if (y + 1 > Global.playerArray.GetLength(1) || y + 2 > Global.playerArray.GetLength(1))
-                            {
-                                Console.WriteLine("Lod se nevejde do pole");
-                            }
-                            else
-                            {
-                                for (int i = 0; i < 3; i++)
-                                    Global.playerArray[index, y - 1 + i] = "K ";
-                                Global.kriznik = 1;
-                                shipInField = true;
-                            }
-                        }
-                    }
-                    else if (type == "P")
-                    {
-                        correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.ponorkaLength);
-                        while (!correctPosition)
-                        {
-                            Console.WriteLine("Lod se sem nevejde");
-                            index = WriteX();
-                            y = WriteY();
-                            correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.ponorkaLength);
-                        }
-                        if (orientation == "V")
-                        {
-                            if (index + 1 > Global.playerArray.GetLength(1) || index + 2 > Global.playerArray.GetLength(1))
-                            {
-                                Console.WriteLine("Lod se nevejde do pole");
-                            }
-                            else
-                            {
-                                for (int i = 0; i < 3; i++)
-                                    Global.playerArray[index + i, y - 1] = "P ";
-                                Global.ponorka = 1;
-                                shipInField = true;
-                            }
-                        }
-                        else
-                        {
-                            if (y + 1 > Global.playerArray.GetLength(1) || y + 2 > Global.playerArray.GetLength(1))
-                            {
-                                Console.WriteLine("Lod se nevejde do pole");
-                            }
-                            else
-                            {
-                                for (int i = 0; i < 3; i++)
-                                    Global.playerArray[index, y - 1 + i] = "P ";
-                                Global.ponorka = 1;
-                                shipInField = true;
-                            }
-                        }
-                    }
-                }
-                Console.Clear();        //vymazani konzole
-            }
-
-        static void CompArrayReveal (int xShow, int yShow, string[,] pcArrayReveal)
+        static int WriteX()        //umoznuje uziveteli vypsat souradnice zadane lode
         {
-            pcArrayReveal[xShow, yShow-1] = Global.pcArray[xShow, yShow-1];
-            Console.WriteLine("Pole pocitace");            
+            Console.WriteLine("zadejte souradnice radku (A-J)");
+
+            string x = Convert.ToString(Console.ReadLine());
+            while (!Global.yRows.Contains(x))
+            {
+                Console.WriteLine("uvadejte velka pismena od A do J");
+                x = Convert.ToString(Console.ReadLine());
+            }
+            int index = Global.yRows.IndexOf(x);
+            return index;
+        }
+
+        static int WriteY()            //umoznuje uziveteli vypsat souradnice zadane lode
+        {
+            Console.WriteLine("zadejte souradnice sloupce (1-10)");
+            int y;
+            while (!int.TryParse(Console.ReadLine(), out y))
+            {
+                Console.WriteLine("uvadejte cisla od 1 do 10");
+            }
+            while (!Global.yColumns.Contains(y))
+            {
+                Console.WriteLine("uvadejte cisla od 1 do 10");
+                y = int.Parse(Console.ReadLine());
+            }
+            return y;
+        }
+        static void ShipLayout()           //vypisovani lodi do pole
+        {
+            bool shipInField = false;
+
+            Console.WriteLine("Zadejte typ lode: L-letadlova, K-kriznik, T-torpedoborec, B-bitevni, P-ponorka");
+            string type = Console.ReadLine();
+            while (type != "L" && type != "K" && type != "T" && type != "B" && type != "P")         //overeni vstupu
+            {
+                Console.WriteLine("zadavejte velka pocatecni pismena lodi: L, K, T, B nebo P");
+                type = Console.ReadLine();
+            }
+            while (type == "L" && Global.letadlova == 1 || type == "K" && Global.kriznik == 1 || type == "T" && Global.torpedoborec == 1 || type == "B" && Global.battleship == 1 || type == "P" && Global.ponorka == 1)
+            {
+                Console.WriteLine("Kazdou lod muzete zadat jen jednou");        //overeni, ze je kazda lod jen jednou
+                type = Console.ReadLine();
+            }
+
+            Console.WriteLine("Zadejte, jak chcete lod umistit: H-horizontalne nebo V-vertikalne");
+            string orientation = Console.ReadLine();
+            while (orientation != "H" && orientation != "V")        //overeni vstupu
+            {
+                Console.WriteLine("zadavejte velka pocatecni pismena orientaci: H nebo V");
+                orientation = Console.ReadLine();
+            }
+            while (!shipInField)        //overeni, aby byla zadana lod v hranicich pole
+            {
+                int index = WriteX();
+                int y = WriteY();
+                bool correctPosition = true;
+
+
+                if (type == "T")        //vypisuje jednotive typy lodi + vola funkci na kontrolovani prekryvani
+                {
+                    correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.torpedoborecLength);
+                    while (!correctPosition)
+                    {
+                        Console.WriteLine("Lod se sem nevejde");
+                        index = WriteX();
+                        y = WriteY();
+                        correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.torpedoborecLength);
+                    }
+
+                    if (orientation == "V")
+                    {
+                        if (index + 1 > Global.playerArray.GetLength(1))
+                        {
+                            Console.WriteLine("Lod se nevejde do pole");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 2; i++)
+                                Global.playerArray[index + i, y - 1] = "T ";
+                            Global.torpedoborec = 1;
+                            shipInField = true;
+                        }
+
+                    }
+                    else
+                    {
+                        if (y + 1 > Global.playerArray.GetLength(0))
+                        {
+                            Console.WriteLine("Lod se nevejde do pole");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 2; i++)
+                                Global.playerArray[index, y - 1 + i] = "T ";
+                            Global.torpedoborec = 1;
+                            shipInField = true;
+                        }
+
+                    }
+                }
+                else if (type == "B")
+                {
+                    correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.battleshipLength);
+                    while (!correctPosition)
+                    {
+                        Console.WriteLine("Lod se sem nevejde");
+                        index = WriteX();
+                        y = WriteY();
+                        correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.battleshipLength);
+                    }
+                    if (orientation == "V")
+                    {
+                        if (index + 1 > Global.playerArray.GetLength(1) || index + 2 > Global.playerArray.GetLength(1) || index + 3 > Global.playerArray.GetLength(1))
+                        {
+                            Console.WriteLine("Lod se nevejde do pole");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 4; i++)
+                                Global.playerArray[index + i, y - 1] = "B ";
+                            Global.battleship = 1;
+                            shipInField = true;
+                        }
+                    }
+                    else
+                    {
+                        if (y + 1 > Global.playerArray.GetLength(1) || y + 2 > Global.playerArray.GetLength(1) || y + 3 > Global.playerArray.GetLength(1))
+                        {
+                            Console.WriteLine("Lod se nevejde do pole");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 4; i++)
+                                Global.playerArray[index, y - 1 + i] = "B ";
+                            Global.battleship = 1;
+                            shipInField = true;
+                        }
+                    }
+                }
+                else if (type == "L")
+                {
+                    correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.letadlovaLength);
+                    while (!correctPosition)
+                    {
+                        Console.WriteLine("Lod se sem nevejde");
+                        index = WriteX();
+                        y = WriteY();
+                        correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.letadlovaLength);
+                    }
+                    if (orientation == "V")
+                    {
+                        if (index + 1 > Global.playerArray.GetLength(1) || index + 2 > Global.playerArray.GetLength(1) || index + 3 > Global.playerArray.GetLength(1) || index + 4 > Global.playerArray.GetLength(1))
+                        {
+                            Console.WriteLine("Lod se nevejde do pole");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 5; i++)
+                                Global.playerArray[index + i, y - 1] = "L ";
+                            Global.letadlova = 1;
+                            shipInField = true;
+                        }
+
+                    }
+                    else
+                    {
+                        if (y + 1 > Global.playerArray.GetLength(1) || y + 2 > Global.playerArray.GetLength(1) || y + 3 > Global.playerArray.GetLength(1) || y + 4 > Global.playerArray.GetLength(1))
+                        {
+                            Console.WriteLine("Lod se nevejde do pole");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 5; i++)
+                                Global.playerArray[index, y - 1 + i] = "L ";
+                            Global.letadlova = 1;
+                            shipInField = true;
+                        }
+                    }
+                }
+                else if (type == "K")
+                {
+
+                    correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.kriznikLength);
+                    while (!correctPosition)
+                    {
+                        Console.WriteLine("Lod se sem nevejde");
+                        index = WriteX();
+                        y = WriteY();
+                        correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.kriznikLength);
+                    }
+                    if (orientation == "V")
+                    {
+                        if (index + 1 > Global.playerArray.GetLength(1) || index + 2 > Global.playerArray.GetLength(1))
+                        {
+                            Console.WriteLine("Lod se nevejde do pole");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 3; i++)
+                                Global.playerArray[index + i, y - 1] = "K ";
+                            Global.kriznik = 1;
+                            shipInField = true;
+                        }
+                    }
+                    else
+                    {
+                        if (y + 1 > Global.playerArray.GetLength(1) || y + 2 > Global.playerArray.GetLength(1))
+                        {
+                            Console.WriteLine("Lod se nevejde do pole");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 3; i++)
+                                Global.playerArray[index, y - 1 + i] = "K ";
+                            Global.kriznik = 1;
+                            shipInField = true;
+                        }
+                    }
+                }
+                else if (type == "P")
+                {
+                    correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.ponorkaLength);
+                    while (!correctPosition)
+                    {
+                        Console.WriteLine("Lod se sem nevejde");
+                        index = WriteX();
+                        y = WriteY();
+                        correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.ponorkaLength);
+                    }
+                    if (orientation == "V")
+                    {
+                        if (index + 1 > Global.playerArray.GetLength(1) || index + 2 > Global.playerArray.GetLength(1))
+                        {
+                            Console.WriteLine("Lod se nevejde do pole");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 3; i++)
+                                Global.playerArray[index + i, y - 1] = "P ";
+                            Global.ponorka = 1;
+                            shipInField = true;
+                        }
+                    }
+                    else
+                    {
+                        if (y + 1 > Global.playerArray.GetLength(1) || y + 2 > Global.playerArray.GetLength(1))
+                        {
+                            Console.WriteLine("Lod se nevejde do pole");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 3; i++)
+                                Global.playerArray[index, y - 1 + i] = "P ";
+                            Global.ponorka = 1;
+                            shipInField = true;
+                        }
+                    }
+                }
+            }
+            Console.Clear();        //vymazani konzole
+        }
+
+        static void CompArrayReveal(int xShow, int yShow, string[,] pcArrayReveal)
+        {
+            pcArrayReveal[xShow, yShow - 1] = Global.pcArray[xShow, yShow - 1];
+            Console.WriteLine("Pole pocitace");
             Console.WriteLine("  ");
             Console.Write("  ");
             foreach (int name in Global.columns)
@@ -707,7 +704,7 @@ namespace battleship
             }
             Console.WriteLine();
         }
-        static void PlayerShooting (string[,] pcArrayReveal)
+        static void PlayerShooting(string[,] pcArrayReveal)
         {
             int xShooting = WriteX();
             int yShooting = WriteY();
@@ -715,7 +712,7 @@ namespace battleship
             if (Global.pcArray[xShooting, yShooting-1] == "* ")
             {
                 Global.pcArray[xShooting, yShooting-1] = "- ";
-                pcArrayReveal[xShooting, yShooting-1] = Global.pcArray[xShooting, yShooting];
+                pcArrayReveal[xShooting, yShooting-1] = Global.pcArray[xShooting, yShooting-1];
                 CompArrayReveal(xShooting, yShooting, pcArrayReveal);
                 Console.WriteLine("nezasahli jste");
             }
@@ -724,138 +721,92 @@ namespace battleship
                 CompArrayReveal(xShooting, yShooting, pcArrayReveal);
                 Console.WriteLine("zasah!");
             }
-            bool notSunken = false;
-            for (int i = 0; i < Global.pcArray.GetLength(0); i++)
+            int numberOfShips = 0;
+            for (int i = 0; i < pcArrayReveal.GetLength(0); i++)
             {
-                for (int j = 0; j < Global.pcArray.GetLength(1); j++)
+                for (int j = 0; j < pcArrayReveal.GetLength(1); j++)
                 {
                     if (Global.playerArray[i, j] == "T ")
                     {
-                        notSunken = true;
-                        break;
+                        numberOfShips++;
                     }
-                    else
-                    {
-                        notSunken = false;
-                    }
-                }
-                if (notSunken)
-                {
-                    break;
                 }
             }
-            if (!notSunken)
+            if (numberOfShips == 2)
             {
                 Console.WriteLine("potopili jste torpedoborec");
                 Global.pcSunkenShips++;
             }
 
             //kriznik
-            notSunken = false;
+            numberOfShips = 0;
             for (int i = 0; i < Global.pcArray.GetLength(0); i++)
             {
                 for (int j = 0; j < Global.pcArray.GetLength(1); j++)
                 {
                     if (Global.pcArray[i, j] == "K ")
                     {
-                        notSunken = true;
-                        break;
+                       numberOfShips++ ;
                     }
-                    else
-                    {
-                        notSunken = false;
-                    }
-                }
-                if (notSunken)
-                {
-                    break;
                 }
             }
-            if (!notSunken)
+            if (numberOfShips==3)
             {
                 Console.WriteLine("potopili jste kriznik");
                 Global.pcSunkenShips++;
             }
+
             //bitevni lod
-            notSunken = false;
+            numberOfShips = 0;
             for (int i = 0; i < Global.pcArray.GetLength(0); i++)
             {
                 for (int j = 0; j < Global.pcArray.GetLength(1); j++)
                 {
                     if (Global.pcArray[i, j] == "B ")
                     {
-                        notSunken = true;
-                        break;
+                                numberOfShips++;
                     }
-                    else
-                    {
-                        notSunken = false;
-                    }
-                }
-                if (notSunken)
-                {
-                    break;
                 }
             }
-            if (!notSunken)
+            if (numberOfShips==4)
             {
                 Console.WriteLine("potopili jste bitevni lod");
                 Global.pcSunkenShips++;
             }
             //letadlova
-            notSunken = false;
+            numberOfShips = 0;
             for (int i = 0; i < Global.pcArray.GetLength(0); i++)
             {
                 for (int j = 0; j < Global.pcArray.GetLength(1); j++)
                 {
                     if (Global.pcArray[i, j] == "L ")
                     {
-                        notSunken = true;
-                        break;
+                        numberOfShips++;
                     }
-                    else
-                    {
-                        notSunken = false;
-                    }
-                }
-                if (notSunken)
-                {
-                    break;
                 }
             }
-            if (!notSunken)
+            if (numberOfShips==5)
             {
                 Console.WriteLine("potopili jste letadlovou lod");
                 Global.pcSunkenShips++;
             }
             //ponorka
-            notSunken = false;
+            numberOfShips=0;
             for (int i = 0; i < Global.pcArray.GetLength(0); i++)
             {
                 for (int j = 0; j < Global.pcArray.GetLength(1); j++)
                 {
                     if (Global.pcArray[i, j] == "P ")
                     {
-                        notSunken = true;
-                        break;
+                        numberOfShips++;
                     }
-                    else
-                    {
-                        notSunken = false;
-                    }
-                }
-                if (notSunken)
-                {
-                    break;
                 }
             }
-            if (!notSunken)
+            if (numberOfShips==3)
             {
                 Console.WriteLine("potopili jste ponorku");
                 Global.pcSunkenShips++;
             }
-
-
         }
 
         static void ComputerShooting ()
@@ -1050,10 +1001,17 @@ namespace battleship
                 Console.WriteLine("na tahu je pocitac");
                 ComputerShooting();
             }
-            
 
+            if (Global.pcSunkenShips == 5)
+            {
+                Console.WriteLine("vyhrali jste!");
+            }
+            else
+            {
+                Console.WriteLine("prohrali jste:(");
+            }
 
-                Console.ReadKey();
+            Console.ReadKey();
             }
     }
 }
