@@ -94,9 +94,9 @@ namespace battleship
 
         static bool ShipInField(int x, int y, string verHor, int shipLength)
         {
-            if (verHor == "H ")
+            if (verHor == "H")
             {
-                for (int i = 0; i < shipLength - 1; i++)
+                for (int i = 0; i < shipLength; i++)
                 {
 
                     if (y > Global.playerArray.GetLength(1) - 1)
@@ -109,7 +109,7 @@ namespace battleship
             }
             else
             {
-                for (int i = 0; i < shipLength-1; i++)
+                for (int i = 0; i < shipLength; i++)
                 {
                 
                 if (x > Global.playerArray.GetLength(1)-1)
@@ -131,7 +131,7 @@ namespace battleship
             {
                 while (number != shipLength)
                 {
-                    if (yourArray[x, y - 1 + number] != "* ")
+                    if (yourArray[x, y + number] != "* ")
                     {
                         return false;
                     }
@@ -143,7 +143,7 @@ namespace battleship
             {
                 while (number != shipLength)
                 {
-                    if (yourArray[x+ number, y - 1] != "* ")
+                    if (yourArray[x+ number, y] != "* ")
                     {
                         return false;
                     }
@@ -152,8 +152,6 @@ namespace battleship
                 return true;
             }
         }
-
-
         static void ComputerShipLayout()       //nahodne rozmistuje lode pocitace + kontroluje, jestli se vejdou/neprekryvaji
         {
             Random rnd = new Random();
@@ -177,52 +175,32 @@ namespace battleship
             {
                 horVer = "H";
             }
+            pcShipInField = ShipInField(pcX, pcY, horVer, Global.torpedoborecLength);
             while (!pcShipInField)
             {
-
-                if (pcOrientation == 1)
-                {
-                    if (pcX + 1 < Global.pcArray.GetLength(1) - 1)
-                    {
-                        for (int i = 0; i < 2; i++)
-                            Global.pcArray[pcX + i, pcY] = "T ";
-                        pcShipInField = true;
-                    }
-                    else
-                    {
-                        pcShipInField = false;
-                        pcX = rnd.Next(0, 10);
-                    }
-                }
-                else
-                {
-                    if (pcY + 1 < Global.pcArray.GetLength(1) - 1)
-                    {
-                        for (int i = 0; i < 2; i++)
-                            Global.pcArray[pcX, pcY + i] = "T ";
-                        pcShipInField = true;
-                    }
-                    else
-                    {
-                        pcShipInField = false;
-                        pcY = rnd.Next(0, 10);
-                    }
-                }
-                CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.torpedoborecLength);
-                while (!pcCorrectPosition)
-                {
-                    pcOrientation = orient.Next(1, 3);
-                    if (pcOrientation == 1)
-                    {
-                        horVer = "V";
-                    }
-                    else
-                    {
-                        horVer = "H";
-                    }
-                    CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.torpedoborecLength);
-                }
+                pcX = rnd.Next(0, 10);
+                pcY = rnd.Next(0, 10);
+                pcShipInField = ShipInField(pcX, pcY, horVer, Global.torpedoborecLength);
             }
+            pcCorrectPosition = CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.torpedoborecLength);
+            while (!pcCorrectPosition)
+            {
+                pcOrientation = orient.Next(1, 3);
+                pcX = rnd.Next(0, 10);
+                pcY = rnd.Next(0,10);
+                pcCorrectPosition = CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.torpedoborecLength);
+            }
+            if (pcOrientation == 1)
+            {
+               for (int i = 0; i < 2; i++)
+                   Global.pcArray[pcX + i, pcY] = "T ";
+            }
+            else
+            {
+               for (int i = 0; i < 2; i++)
+                  Global.pcArray[pcX, pcY + i] = "T ";
+            }
+                
 
             //bitevni lod
             pcX = rnd.Next(0, 10);
@@ -237,51 +215,30 @@ namespace battleship
             {
                 horVer = "H";
             }
-            pcShipInField = false;
+            pcShipInField = ShipInField(pcX, pcY, horVer, Global.battleshipLength);
             while (!pcShipInField)
             {
-                if (pcOrientation == 1)
-                {
-                    if (pcX + 1 < Global.pcArray.GetLength(1) - 1 && pcX + 2 < Global.pcArray.GetLength(1) - 1 && pcX + 3 < Global.pcArray.GetLength(1) - 1)
-                    {
-                        for (int i = 0; i < 4; i++)
-                            Global.pcArray[pcX + i, pcY] = "B ";
-                        pcShipInField = true;
-                    }
-                    else
-                    {
-                        pcShipInField = false;
-                        pcX = rnd.Next(0, 10);
-                    }
-                }
-                else
-                {
-                    if (pcY + 1 < Global.pcArray.GetLength(1) - 1 && pcY + 2 < Global.pcArray.GetLength(1) - 1 && pcY + 3 < Global.pcArray.GetLength(1) - 1)
-                    {
-                        for (int i = 0; i < 4; i++)
-                            Global.pcArray[pcX, pcY + i] = "B ";
-                        pcShipInField = true;
-                    }
-                    else
-                    {
-                        pcShipInField = false;
-                        pcY = rnd.Next(0, 10);
-                    }
-                }
-                CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.battleshipLength);
-                while (!pcCorrectPosition)
-                {
-                    pcOrientation = orient.Next(1, 3);
-                    if (pcOrientation == 1)
-                    {
-                        horVer = "V";
-                    }
-                    else
-                    {
-                        horVer = "H";
-                    }
-                    CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.battleshipLength);
-                }
+                pcX = rnd.Next(0, 10);
+                pcY = rnd.Next(0, 10);
+                pcShipInField = ShipInField(pcX, pcY, horVer, Global.battleshipLength);
+            }
+            pcCorrectPosition = CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.battleshipLength);
+            while (!pcCorrectPosition)
+            {
+                pcOrientation = orient.Next(1, 3);
+                pcX = rnd.Next(0, 10);
+                pcY = rnd.Next(0, 10);
+                pcCorrectPosition = CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.battleshipLength);
+            }
+            if (pcOrientation == 1)
+            {
+                for (int i = 0; i < 4; i++)
+                    Global.pcArray[pcX + i, pcY] = "B ";
+            }
+            else
+            {
+                for (int i = 0; i < 4; i++)
+                    Global.pcArray[pcX, pcY + i] = "B ";
             }
 
             //letadlova lod
@@ -297,52 +254,32 @@ namespace battleship
             {
                 horVer = "H";
             }
-            pcShipInField = false;
+            pcShipInField = ShipInField(pcX, pcY, horVer, Global.letadlovaLength);
             while (!pcShipInField)
             {
-                if (pcOrientation == 1)
-                {
-                    if (pcX + 1 < Global.pcArray.GetLength(1) - 1 && pcX + 2 < Global.pcArray.GetLength(1) - 1 && pcX + 3 < Global.pcArray.GetLength(1) - 1 && pcX + 4 < Global.pcArray.GetLength(1) - 1)
-                    {
-                        for (int i = 0; i < 5; i++)
-                            Global.pcArray[pcX + i, pcY] = "L ";
-                        pcShipInField = true;
-                    }
-                    else
-                    {
-                        pcShipInField = false;
-                        pcX = rnd.Next(0, 10);
-                    }
-                }
-                else
-                {
-                    if (pcY + 1 < Global.pcArray.GetLength(1) - 1 && pcY + 2 < Global.pcArray.GetLength(1) - 1 && pcY + 3 < Global.pcArray.GetLength(1) - 1 && pcY + 4 < Global.pcArray.GetLength(1) - 1)
-                    {
-                        for (int i = 0; i < 5; i++)
-                            Global.pcArray[pcX, pcY + i] = "L ";
-                        pcShipInField = true;
-                    }
-                    else
-                    {
-                        pcShipInField = false;
-                        pcY = rnd.Next(0, 10);
-                    }
-                }
-                CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.letadlovaLength);
-                while (!pcCorrectPosition)
-                {
-                    pcOrientation = orient.Next(1, 3);
-                    if (pcOrientation == 1)
-                    {
-                        horVer = "V";
-                    }
-                    else
-                    {
-                        horVer = "H";
-                    }
-                    CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.letadlovaLength);
-                }
+                pcX = rnd.Next(0, 10);
+                pcY = rnd.Next(0, 10);
+                pcShipInField = ShipInField(pcX, pcY, horVer, Global.letadlovaLength);
             }
+            pcCorrectPosition = CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.letadlovaLength);
+            while (!pcCorrectPosition)
+            {
+                pcOrientation = orient.Next(1, 3);
+                pcX = rnd.Next(0, 10);
+                pcY = rnd.Next(0, 10);
+                pcCorrectPosition = CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.letadlovaLength);
+            }
+            if (pcOrientation == 1)
+            {
+                for (int i = 0; i < 5; i++)
+                    Global.pcArray[pcX + i, pcY] = "L ";
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                    Global.pcArray[pcX, pcY + i] = "L ";
+            }
+
             //kriznik
             pcX = rnd.Next(0, 10);
             pcY = rnd.Next(0, 10);
@@ -356,52 +293,32 @@ namespace battleship
             {
                 horVer = "H";
             }
-            pcShipInField = false;
+            pcShipInField = ShipInField(pcX, pcY, horVer, Global.kriznikLength);
             while (!pcShipInField)
             {
-                if (pcOrientation == 1)
-                {
-                    if (pcX + 1 < Global.pcArray.GetLength(1) - 1 && pcX + 2 < Global.pcArray.GetLength(1) - 1)
-                    {
-                        for (int i = 0; i < 3; i++)
-                            Global.pcArray[pcX + i, pcY] = "K ";
-                        pcShipInField = true;
-                    }
-                    else
-                    {
-                        pcShipInField = false;
-                        pcX = rnd.Next(0, 10);
-                    }
-                }
-                else
-                {
-                    if (pcY + 1 < Global.pcArray.GetLength(1) - 1 && pcY + 2 < Global.pcArray.GetLength(1) - 1)
-                    {
-                        for (int i = 0; i < 3; i++)
-                            Global.pcArray[pcX, pcY + i] = "K ";
-                        pcShipInField = true;
-                    }
-                    else
-                    {
-                        pcShipInField = false;
-                        pcY = rnd.Next(0, 10);
-                    }
-                }
-                CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.kriznikLength);
-                while (!pcCorrectPosition)
-                {
-                    pcOrientation = orient.Next(1, 3);
-                    if (pcOrientation == 1)
-                    {
-                        horVer = "V";
-                    }
-                    else
-                    {
-                        horVer = "H";
-                    }
-                    CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.kriznikLength);
-                }
+                pcX = rnd.Next(0, 10);
+                pcY = rnd.Next(0, 10);
+                pcShipInField = ShipInField(pcX, pcY, horVer, Global.kriznikLength);
             }
+            pcCorrectPosition = CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.kriznikLength);
+            while (!pcCorrectPosition)
+            {
+                pcOrientation = orient.Next(1, 3);
+                pcX = rnd.Next(0, 10);
+                pcY = rnd.Next(0, 10);
+                pcCorrectPosition = CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.kriznikLength);
+            }
+            if (pcOrientation == 1)
+            {
+                for (int i = 0; i < 3; i++)
+                    Global.pcArray[pcX + i, pcY] = "K ";
+            }
+            else
+            {
+                for (int i = 0; i < 3; i++)
+                    Global.pcArray[pcX, pcY + i] = "K ";
+            }
+
             //ponorka
             pcX = rnd.Next(0, 10);
             pcY = rnd.Next(0, 10);
@@ -415,51 +332,30 @@ namespace battleship
             {
                 horVer = "H";
             }
-            pcShipInField = false;
+            pcShipInField = ShipInField(pcX, pcY, horVer, Global.ponorkaLength);
             while (!pcShipInField)
             {
-                if (pcOrientation == 1)
-                {
-                    if (pcX + 1 < Global.pcArray.GetLength(1) - 1 && pcX + 2 < Global.pcArray.GetLength(1) - 1)
-                    {
-                        for (int i = 0; i < 3; i++)
-                            Global.pcArray[pcX + i, pcY] = "P ";
-                        pcShipInField = true;
-                    }
-                    else
-                    {
-                        pcShipInField = false;
-                        pcX = rnd.Next(0, 10);
-                    }
-                }
-                else
-                {
-                    if (pcY + 1 < Global.pcArray.GetLength(1) - 1 && pcY + 2 < Global.pcArray.GetLength(1) - 1)
-                    {
-                        for (int i = 0; i < 3; i++)
-                            Global.pcArray[pcX, pcY + i] = "P ";
-                        pcShipInField = true;
-                    }
-                    else
-                    {
-                        pcShipInField = false;
-                        pcY = rnd.Next(0, 10);
-                    }
-                }
-                CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.ponorkaLength);
-                while (!pcCorrectPosition)
-                {
-                    pcOrientation = orient.Next(1, 3);
-                    if (pcOrientation == 1)
-                    {
-                        horVer = "V";
-                    }
-                    else
-                    {
-                        horVer = "H";
-                    }
-                    CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.ponorkaLength);
-                }
+                pcX = rnd.Next(0, 10);
+                pcY = rnd.Next(0, 10);
+                pcShipInField = ShipInField(pcX, pcY, horVer, Global.ponorkaLength);
+            }
+            pcCorrectPosition = CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.ponorkaLength);
+            while (!pcCorrectPosition)
+            {
+                pcOrientation = orient.Next(1, 3);
+                pcX = rnd.Next(0, 10);
+                pcY = rnd.Next(0, 10);
+                pcCorrectPosition = CheckPosition(pcX, pcY, Global.pcArray, horVer, Global.ponorkaLength);
+            }
+            if (pcOrientation == 1)
+            {
+                for (int i = 0; i < 3; i++)
+                    Global.pcArray[pcX + i, pcY] = "P ";
+            }
+            else
+            {
+                for (int i = 0; i < 3; i++)
+                    Global.pcArray[pcX, pcY + i] = "P ";
             }
         }
 
@@ -524,8 +420,6 @@ namespace battleship
             int index = WriteX();
             int y = WriteY();
             bool correctPosition = true;
-
-
                 if (type == "T")        //vypisuje jednotive typy lodi + vola funkci na kontrolovani prekryvani
                 {
                     shipInField = ShipInField(index, y - 1, orientation, Global.torpedoborecLength);
@@ -950,7 +844,7 @@ namespace battleship
                     }
                 }
                 PlayerArray();
-            Console.WriteLine("Rozmistete si lode: zadavejte vzdy souradnice leveho horniho rohu lode");
+                Console.WriteLine("Rozmistete si lode: zadavejte vzdy souradnice leveho horniho rohu lode");
                 while (Global.ponorka != 1 || Global.torpedoborec != 1 || Global.battleship != 1 || Global.letadlova != 1 || Global.kriznik != 1)
                 {
                     ShipLayout();                   //opakuje se zadavani lodi do pole, dokud tam neni vsech pet lodi
