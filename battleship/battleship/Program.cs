@@ -16,6 +16,7 @@ namespace battleship
 
     internal class Program
     {
+        //TO DO: strategie strileni vpravo + obecne
 
         public static class Global
         {
@@ -379,12 +380,12 @@ namespace battleship
 
         static int WriteX()        //umoznuje uziveteli vypsat souradnice radku zadavane lode + osetreni vstupu
         {
-            Console.WriteLine("zadejte souradnice radku (A-J)");
+            Console.WriteLine("Zadejte souradnice radku (A-J)");
 
             string x = Convert.ToString(Console.ReadLine());
             while (!Global.yRows.Contains(x))
             {
-                Console.WriteLine("uvadejte velka pismena od A do J");
+                Console.WriteLine("Uvadejte velka pismena od A do J");
                 x = Convert.ToString(Console.ReadLine());
             }
             int index = Global.yRows.IndexOf(x);
@@ -393,15 +394,15 @@ namespace battleship
 
         static int WriteY()            //umoznuje uziveteli vypsat souradnice sloupce zadavane lode + osetreni vstupu
         {
-            Console.WriteLine("zadejte souradnice sloupce (1-10)");
+            Console.WriteLine("Zadejte souradnice sloupce (1-10)");
             int y;
             while (!int.TryParse(Console.ReadLine(), out y))
             {
-                Console.WriteLine("uvadejte cisla od 1 do 10");
+                Console.WriteLine("Uvadejte cisla od 1 do 10");
             }
             while (!Global.yColumns.Contains(y))
             {
-                Console.WriteLine("uvadejte cisla od 1 do 10");
+                Console.WriteLine("Uvadejte cisla od 1 do 10");
                 y = int.Parse(Console.ReadLine());
             }
             return y;
@@ -410,20 +411,20 @@ namespace battleship
         {
             bool shipInField = false;
             bool goodPosition = false;
-            Console.WriteLine("Zadejte typ lode: L-letadlova, K-kriznik, T-torpedoborec, B-bitevni, P-ponorka");
+            Console.WriteLine("Zadejte typ lode: L-letadlova (1x5), K-kriznik (1x3), T-torpedoborec (1x2), B-bitevni (1x4), P-ponorka (1x3)");
             string type = Console.ReadLine();
             while (type != "L" && type != "K" && type != "T" && type != "B" && type != "P")         //overeni vstupu
             {
-                Console.WriteLine("zadavejte velka pocatecni pismena lodi: L, K, T, B nebo P");
+                Console.WriteLine("Zadavejte velka pocatecni pismena lodi: L, K, T, B nebo P");
                 type = Console.ReadLine();
             }
             while (type == "L" && Global.letadlova == 1 || type == "K" && Global.kriznik == 1 || type == "T" && Global.torpedoborec == 1 || type == "B" && Global.battleship == 1 || type == "P" && Global.ponorka == 1)
             {
-                Console.WriteLine("Kazdou lod muzete zadat jen jednou, zadejte jinou lod");        //overeni, ze je kazda lod jen jednou
+                Console.WriteLine("Pozor, kazdou lod muzete zadat jen jednou, umistete jinou lod");        //overeni, ze je kazda lod jen jednou
                 type = Console.ReadLine();
                 while (type != "L" && type != "K" && type != "T" && type != "B" && type != "P")         //overeni vstupu
                 {
-                    Console.WriteLine("zadavejte velka pocatecni pismena lodi: L, K, T, B nebo P");
+                    Console.WriteLine("Zadavejte velka pocatecni pismena lodi: L, K, T, B nebo P");
                     type = Console.ReadLine();
                 }
             }
@@ -432,7 +433,7 @@ namespace battleship
             string orientation = Console.ReadLine();
             while (orientation != "H" && orientation != "V")        //overeni vstupu
             {
-                Console.WriteLine("zadavejte velka pocatecni pismena orientaci: H nebo V");
+                Console.WriteLine("Zadavejte velka pocatecni pismena orientaci: H nebo V");
                 orientation = Console.ReadLine();
             }
             int index;
@@ -447,7 +448,7 @@ namespace battleship
                     shipInField = ShipInField(index, y - 1, orientation, Global.torpedoborecLength);
                     if (shipInField)    //vola funkci na kontrolu, jestli se lod vejde do pole - kdyz ano, pokracuje se dal
                     {
-                        Console.WriteLine("Lod se nevejde do pole");
+                        Console.WriteLine("Pozor, lod se nevejde do pole");
                         correctPosition = CheckPosition(index, y - 1, Global.playerArray, orientation, Global.torpedoborecLength);
                         if (correctPosition)    // kontrola prekryvani lodi - kdyz se neprekryvaji, pokracuje se k tisteni lodi
                         {
@@ -468,12 +469,12 @@ namespace battleship
                         }
                         else
                         {
-                            Console.WriteLine("lod se sem nevejde"); //kdyz neni splneno neprekryvani, napise to uzivateli a vrati se na zacatek
+                            Console.WriteLine("Pozor, tady uz je jina lod"); //kdyz neni splneno neprekryvani, napise to uzivateli a vrati se na zacatek
                         }
                     }
                     else
                     {
-                        Console.WriteLine("lod se nevejde do pole");    //kdyz neni splneno, ze lod je v poli, napise to uzivateli a vrati se na zacatek
+                        Console.WriteLine("Pozor, lod se nevejde do pole");    //kdyz neni splneno, ze lod je v poli, napise to uzivateli a vrati se na zacatek
                     }
                 }
             }
@@ -505,12 +506,12 @@ namespace battleship
                         }
                         else
                         {
-                            Console.WriteLine("lod se sem nevejde");
+                            Console.WriteLine("Pozor, tady uz je jina lod");
                         }
                     }
                     else
                     {
-                        Console.WriteLine("lod se nevejde do pole");
+                        Console.WriteLine("Pozor, lod se nevejde do pole");
                     }
                 }
             }
@@ -542,12 +543,12 @@ namespace battleship
                         }
                         else
                         {
-                            Console.WriteLine("lod se sem nevejde");
+                            Console.WriteLine("Pozor, tady uz je jina lod");
                         }
                     }
                     else
                     {
-                        Console.WriteLine("lod se nevejde do pole");
+                        Console.WriteLine("Pozor, lod se nevejde do pole");
                     }
                 }
 
@@ -580,12 +581,12 @@ namespace battleship
                         }
                         else
                         {
-                            Console.WriteLine("lod se sem nevejde");
+                            Console.WriteLine("Pozor, tady uz je jina lod");
                         }
                     }
                     else
                     {
-                        Console.WriteLine("lod se nevejde do pole");
+                        Console.WriteLine("Pozor, lod se nevejde do pole");
                     }
                 }
             }
@@ -617,18 +618,18 @@ namespace battleship
                         }
                         else
                         {
-                            Console.WriteLine("lod se sem nevejde");
+                            Console.WriteLine("Pozor, tady uz je jina lod");
                         }
                     }
                     else
                     {
-                        Console.WriteLine("lod se nevejde do pole");
+                        Console.WriteLine("Pozor, lod se nevejde do pole");
                     }
                 }
             }
         }
 
-        static void Hit(int xShooting, int yShooting, string[,] pcArrayReveal)      //co se deje, kdyz se uzivatel trefi do lode
+        static void CheckHit(int xShooting, int yShooting, string[,] pcArrayReveal)      //co se deje, kdyz se uzivatel trefi do lode
         {
             //kontrola, jestli sem uz uzivatel nestrilel
             while (pcArrayReveal[xShooting, yShooting - 1] == "- " || pcArrayReveal[xShooting, yShooting - 1] == "T " ||
@@ -636,7 +637,7 @@ namespace battleship
                     pcArrayReveal[xShooting, yShooting - 1] == "L " || pcArrayReveal[xShooting, yShooting - 1] == "K ")
             {
                 CompArrayReveal(pcArrayReveal);
-                Console.WriteLine("sem uz jste strileli, strilejte na jine souradnice");
+                Console.WriteLine("Sem uz jste strileli, strilejte na jine souradnice");
                 xShooting = WriteX();   //pokud ano, musi zadat nove souradnice
                 yShooting = WriteY();
             }
@@ -654,54 +655,91 @@ namespace battleship
                     Global.torpedoborecHits++;
                     if (Global.torpedoborecHits == Global.torpedoborecLength)
                     {
-                        Console.WriteLine("potopili jste torpedoborec");
+                        Console.WriteLine("Zasah, potopili jste torpedoborec!");
                         Global.pcSunkenShips++;
                     }
+                    else
+                    {
+                        Console.WriteLine("Zasah!");
+                    }
                 }
-                if (pcArrayReveal[xShooting, yShooting - 1] == "K ")        //atd.
+                else if (pcArrayReveal[xShooting, yShooting - 1] == "K ")        //atd.
                 {
                     Global.kriznikHits++;
                     if (Global.kriznikHits == Global.kriznikLength)
                     {
-                        Console.WriteLine("potopili jste kriznik");
+                        Console.WriteLine("Zasah, potopili jste kriznik!");
                         Global.pcSunkenShips++;
                     }
+                    else
+                    {
+                        Console.WriteLine("Zasah!");
+                    }
                 }
-                if (pcArrayReveal[xShooting, yShooting - 1] == "B ")
+                else if (pcArrayReveal[xShooting, yShooting - 1] == "B ")
                 {
                     Global.battleshipHits++;
                     if (Global.battleshipHits == Global.battleshipLength)
                     {
-                        Console.WriteLine("potopili jste bitevni lod");
+                        Console.WriteLine("Zasah, potopili jste bitevni lod!");
                         Global.pcSunkenShips++;
                     }
+                    else
+                    {
+                        Console.WriteLine("Zasah!");
+                    }
                 }
-                if (pcArrayReveal[xShooting, yShooting - 1] == "L ")
+                else if (pcArrayReveal[xShooting, yShooting - 1] == "L ")
                 {
                     Global.letadlovaHits++;
                     if (Global.letadlovaHits == Global.letadlovaLength)
                     {
-                        Console.WriteLine("potopili jste letadlovou lod");
+                        Console.WriteLine("Zasah, potopili jste letadlovou lod!");
                         Global.pcSunkenShips++;
                     }
+                    else
+                    {
+                        Console.WriteLine("Zasah!");
+                    }
                 }
-                if (pcArrayReveal[xShooting, yShooting - 1] == "P ")
+                else if (pcArrayReveal[xShooting, yShooting - 1] == "P ")
                 {
                     Global.ponorkaHits++;
                     if (Global.ponorkaHits == Global.ponorkaLength)
                     {
-                        Console.WriteLine("potopili jste ponorku");
+                        Console.WriteLine("Zasah, potopili jste ponorku!");
                         Global.pcSunkenShips++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Zasah!");
                     }
                 }
             }
-
         }
 
         static void Bomb(int xShooting, int yShooting, string verHor, string[,] pcArrayReveal)
         {
-            if (verHor == "H")      //kdyz bomba horizontalne, prepise tri po sobe jdouci vedle sebe lezici hvezdicky, podle toho, jestli tam je lod nebo ne
+            bool BombPathCheck = false;
+            if (verHor == "H")
             {
+                while (!BombPathCheck)      //zkontroluje, jestli uz bomba nezasahla misto, kam strilel, pokud ano, vybere neve souradnice pro bombu
+                {
+                    BombPathCheck = true;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (pcArrayReveal[xShooting, yShooting - 1 + i] == "- " || pcArrayReveal[xShooting, yShooting - 1 + i] == "/ ")
+                        {
+                            BombPathCheck = false;
+                            Console.Clear();
+                            Console.WriteLine("\x1b[3J");
+                            CompArrayReveal(pcArrayReveal);
+                            Console.WriteLine("Bomba by zasahla oblast, kam uz jste strileli, zadejte jine souradnice");
+                            xShooting = WriteX();
+                            yShooting = WriteY();
+                        }
+                    }
+                }
                 for (int i = 0; i < 3; i++)
                 {
                     if (Global.pcArray[xShooting, yShooting - 1 + i] == "* ")
@@ -712,14 +750,30 @@ namespace battleship
                     }
                     else
                     {
-                        Console.WriteLine("zasah!");
-                        Hit(xShooting, yShooting + i, pcArrayReveal);
+                        CheckHit(xShooting, yShooting + i, pcArrayReveal);
 
                     }
                 }
             }
-            else         //kdyz bomba vertikalne, prepise tri po sobe jdouci pod sebou lezici hvezdicky, podle toho, jestli tam je lod nebo ne
+            if (verHor == "V")
             {
+                while (!BombPathCheck)      //zkontroluje, jestli uz bomba nezasahla misto, kam strilel, pokud ano, vybere neve souradnice pro bombu
+                {
+                    BombPathCheck = true;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (pcArrayReveal[xShooting + i, yShooting - 1] == "- " || pcArrayReveal[xShooting + i, yShooting - 1] == "/ ")
+                        {
+                            BombPathCheck = false;
+                            Console.Clear();
+                            Console.WriteLine("\x1b[3J");
+                            CompArrayReveal(pcArrayReveal);
+                            Console.WriteLine("Bomba by zasahla oblast, kam uz jste strileli, zadejte jine souradnice");
+                            xShooting = WriteX();
+                            yShooting = WriteY();
+                        }
+                    }
+                }
                 for (int i = 0; i < 3; i++)
                 {
                     if (Global.pcArray[xShooting + i, yShooting - 1] == "* ")
@@ -730,9 +784,7 @@ namespace battleship
                     }
                     else
                     {
-                        Console.WriteLine("zasah!");
-                        Hit(xShooting + i, yShooting, pcArrayReveal);
-
+                        CheckHit(xShooting + i, yShooting, pcArrayReveal);
                     }
                 }
             }
@@ -745,12 +797,11 @@ namespace battleship
                 Global.pcArray[xShooting, yShooting - 1] = "- ";
                 pcArrayReveal[xShooting, yShooting - 1] = Global.pcArray[xShooting, yShooting - 1];
                 CompArrayReveal(pcArrayReveal);
-                Console.WriteLine("nezasahli jste");
+                Console.WriteLine("Nezasahli jste");
             }
             else   //kdyz se trefi, funkce
             {
-                Console.WriteLine("zasah!");
-                Hit(xShooting, yShooting, pcArrayReveal);
+                CheckHit(xShooting, yShooting, pcArrayReveal);
 
             }
         }
@@ -785,15 +836,15 @@ namespace battleship
             string selectWeaponInfo;
             if (Global.numberOfBullets == 0)
             {
-                selectWeaponInfo = "nemate zadne naboje, pro doplneni musite jedno kolo vynechat (stisknete S)";
+                selectWeaponInfo = "Nemate zadne naboje, pro doplneni musite jedno kolo vynechat (stisknete S)";
             }
             else
             {
-                selectWeaponInfo = "mate " + Global.numberOfBullets + " naboju, pro strelbu stisknete N";
+                selectWeaponInfo = "Mate " + Global.numberOfBullets + " naboju, pro strelbu stisknete N";
             }
             if (Global.bombUsed == 0)
             {
-                selectWeaponInfo = selectWeaponInfo + " pro pouziti bomby stisknete B";
+                selectWeaponInfo = selectWeaponInfo + ", pro pouziti bomby stisknete B";
             }
             else
             {
@@ -809,20 +860,20 @@ namespace battleship
                     case "B":
                         if (Global.bombUsed == 0) //osetreni, ze nepouzije bombu znovu
                         {
-                            Console.WriteLine("zadejte, zda chcete bombu spustit V vertikalne nebo H horizontalne");
+                            Console.WriteLine("Zadejte, zda chcete bombu spustit V vertikalne nebo H horizontalne");
                             string verHor = Console.ReadLine();
                             while (verHor != "V" && verHor != "H")      //kontrola vstupu
                             {
-                                Console.WriteLine("zadejte pouze V nebo H");
+                                Console.WriteLine("Zadejte pouze V nebo H");
                                 verHor = Console.ReadLine();
                             }
-                            Console.WriteLine("zadejte souradnice pro levy horni roh strely");  //zadava souradnice leveho horniho rohu strely
+                            Console.WriteLine("Zadejte souradnice pro levy horni roh strely");  //zadava souradnice leveho horniho rohu strely
                             xShooting = WriteX();
                             yShooting = WriteY();
                             bool bombInField = ShipInField(xShooting, yShooting - 1, verHor, 3);
                             while (!bombInField)        //vsechny souradnice bomby musi byt v poli - kontrola
                             {
-                                Console.WriteLine("bomba se nevejde do pole");
+                                Console.WriteLine("Pozor, bomba se nevejde do pole");
                                 xShooting = WriteX();
                                 yShooting = WriteY();
                                 bombInField = ShipInField(xShooting, yShooting - 1, verHor, 3);
@@ -905,7 +956,7 @@ namespace battleship
                                 return (i, j - 1);
                             }
                         }
-                        if (j < 0)
+                        if (j < 9)
                         {
                             if (Global.playerArray[i, j + 1] != "/ " && Global.playerArray[i, j + 1] != "- ")
                             {
@@ -918,64 +969,97 @@ namespace battleship
             return (xShooting, yShooting);  //pokud jeste nema zasah, nebo uz vedle strilel, vrati random cisla
         }
 
-        static void PcHit(int xShooting, int yShooting)
+        static void PcCheckHit(int xShooting, int yShooting)
         {
             while (Global.playerArray[xShooting, yShooting] == "- " || Global.playerArray[xShooting, yShooting] == "/ ")
             {
                 (xShooting, yShooting) = XYShooting();      //kontrola, ze nestrili 2x na stejne misto
             }
-            Console.WriteLine("pocitac zasahl vasi lod");       //pokud zasahne , oznaci pole /, podle toho, o jakou jde lod, zvysi pocet trefeni
-            Global.playerArray[xShooting, yShooting] = "/ ";
-            if (Global.playerArray[xShooting, yShooting] == "T ")
+            if (Global.playerArray[xShooting, yShooting] != "* ")
             {
-                Global.pcTorpedoborecHits++;
+                Console.WriteLine("Pocitac zasahl vasi lod");       //pokud zasahne , oznaci pole /, podle toho, o jakou jde lod, zvysi pocet trefeni
+                Global.playerArray[xShooting, yShooting] = "/ ";
+                if (Global.playerArray[xShooting, yShooting] == "T ")
+                {
+                    Global.pcTorpedoborecHits++;
+                }
+                else if (Global.playerArray[xShooting, yShooting] == "L ")
+                {
+                    Global.pcLetadlovaHits++;
+                }
+                else if (Global.playerArray[xShooting, yShooting] == "B ")
+                {
+                    Global.pcBattleshipHits++;
+                }
+                else if (Global.playerArray[xShooting, yShooting] == "K ")
+                {
+                    Global.pcKriznikHits++;
+                }
+                else if (Global.playerArray[xShooting, yShooting] == "P ")
+                {
+                    Global.pcPonorkaHits++;
+                }
             }
-            else if (Global.playerArray[xShooting, yShooting] == "L ")
+            else
             {
-                Global.pcLetadlovaHits++;
-            }
-            else if (Global.playerArray[xShooting, yShooting] == "B ")
-            {
-                Global.pcBattleshipHits++;
-            }
-            else if (Global.playerArray[xShooting, yShooting] == "K ")
-            {
-                Global.pcKriznikHits++;
-            }
-            else if (Global.playerArray[xShooting, yShooting] == "P ")
-            {
-                Global.pcPonorkaHits++;
+                Console.WriteLine("Pocitac nezasahl vasi lod");     //pokud nezasahne lod, napise -
+                Global.playerArray[xShooting, yShooting] = "- ";
             }
         }
         static void PcBomb(int xShooting, int yShooting, string verHor)
         {
+            bool BombPathCheck = false;
             if (verHor == "H")
             {
+                while (!BombPathCheck)      //zkontroluje, jestli uz bomba nezasahla misto, kam strilel, pokud ano, vybere neve souradnice pro bombu
+                {
+                    BombPathCheck = true;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (Global.playerArray[xShooting, yShooting + i] == "- " || Global.playerArray[xShooting, yShooting + i] == "/ ")
+                        {
+                            BombPathCheck = false;
+                            (xShooting, yShooting) = XYShooting();
+                        }
+                    }
+                }
                 for (int i = 0; i < 3; i++)
                 {
                     if (Global.playerArray[xShooting, yShooting + i] == "* ")
                     {
                         Global.playerArray[xShooting, yShooting + i] = "- ";
-                        Console.WriteLine("pocitac nezasahl vasi lod");
+                        Console.WriteLine("Pocitac nezasahl vasi lod");
                     }
                     else
                     {
-                        PcHit(xShooting, yShooting + i);
+                        PcCheckHit(xShooting, yShooting + i);
                     }
                 }
             }
             else
             {
+                while (!BombPathCheck)
+                {
+                    BombPathCheck = true;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (Global.playerArray[xShooting + i, yShooting] == "- " || Global.playerArray[xShooting + i, yShooting] == "/ ")
+                        {
+                            BombPathCheck = false;
+                            (xShooting, yShooting) = XYShooting();
+                        }
+                    }
+                }
                 for (int i = 0; i < 3; i++)
                 {
                     if (Global.playerArray[xShooting + i, yShooting] == "* ")
                     {
                         Global.playerArray[xShooting + i, yShooting] = "- ";
-                        Console.WriteLine("pocitac nezasahl vasi lod");
+                        Console.WriteLine("Pocitac nezasahl vasi lod");
                     }
                     else
                     {
-                        PcHit(xShooting + i, yShooting);
+                        PcCheckHit(xShooting + i, yShooting);
                     }
                 }
             }
@@ -985,7 +1069,7 @@ namespace battleship
             int xShooting;
             int yShooting;
             Random rnd = new Random();
-            int weapon = rnd.Next(1, 4);
+            int weapon = rnd.Next(1, 10);
             bool correctAction = false;
             while (!correctAction)
             {
@@ -1020,36 +1104,34 @@ namespace battleship
                             weapon = rnd.Next(1, 4);
                         }
                         break;
-                    case 2:     //strileni
-                        if (Global.pcNumberOfBullets != 0)
+                    case 2:     //strileni, aby byla mensi sance, ze si na zacatku vybere bombu
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                        if (Global.pcNumberOfBullets != 0)      //pokud si nevybere bombu, tak pokud ma naboje, muze strilet
                         {
                             (xShooting, yShooting) = XYShooting();
                             if (Global.playerArray[xShooting, yShooting] != "* ")
                             {
-                                PcHit(xShooting, yShooting);
+                                PcCheckHit(xShooting, yShooting);
                             }
                             else
                             {
-                                Console.WriteLine("pocitac nezasahl vasi lod");     //pokud nezasahne lod, napise -
+                                Console.WriteLine("Pocitac nezasahl vasi lod");     //pokud nezasahne lod, napise -
                                 Global.playerArray[xShooting, yShooting] = "- ";
                             }
                             Global.pcNumberOfBullets--;
                             correctAction = true;
                         }
-                        else
-                        {
-                            weapon = rnd.Next(1, 4);
-                        }
-                        break;
-                    case 3:     //preskoceni kola
-                        if (Global.pcNumberOfBullets == 0)
+                        else     //pokud nema naboje, dobiji si
                         {
                             Global.pcNumberOfBullets += 5;
-                            Console.WriteLine("pocitac preskocil kolo, dobiji si naboje");
-                        }
-                        else
-                        {
-                            weapon = rnd.Next(1, 4);
+                            Console.WriteLine("Pocitac preskocil kolo, dobiji si naboje");
+                            correctAction = true;
                         }
                         break;
                     default:
@@ -1058,29 +1140,30 @@ namespace battleship
             }
             if (Global.pcTorpedoborecHits == 2)     //pokud se pocet trefeni rovna delce lodi, je potopena, zvysuje se cislo potopenych lodi pocitacem
             {
-                Console.WriteLine("pocitac vam potopil torpedoborec");
+                Console.WriteLine("Pocitac vam potopil torpedoborec");
                 Global.playerSunkenShips++;
             }
             if (Global.pcLetadlovaHits == 5)
             {
-                Console.WriteLine("pocitac vam potopil letadlovou lod");
+                Console.WriteLine("Pocitac vam potopil letadlovou lod");
                 Global.playerSunkenShips++;
             }
             if (Global.pcBattleshipHits == 4)
             {
-                Console.WriteLine("pocitac vam potopil bitevni lod");
+                Console.WriteLine("Pocitac vam potopil bitevni lod");
                 Global.playerSunkenShips++;
             }
             if (Global.pcKriznikHits == 3)
             {
-                Console.WriteLine("pocitac vam potopil kriznik");
+                Console.WriteLine("Pocitac vam potopil kriznik");
                 Global.playerSunkenShips++;
             }
             if (Global.pcPonorkaHits == 3)
             {
-                Console.WriteLine("pocitac vam potopil ponorku");
+                Console.WriteLine("Pocitac vam potopil ponorku");
                 Global.playerSunkenShips++;
             }
+            Console.WriteLine();
             PlayerArray();
         }
         static void Main(string[] args)
@@ -1110,7 +1193,6 @@ namespace battleship
                 PlayerArray();
             }
             ComputerShipLayout();           //pocitac zada lode do pole
-            //ComputerArray(); //TESTOVANI - SMAZAT
             string[,] pcArrayReveal = new string[10, 10];       //zavedeni noveho pole, ktere se ukazuje uzivateli misto pole pocitace, do ktereho si ulozil lode
             for (int i = 0; i < pcArrayReveal.GetLength(0); i++)
             {
@@ -1121,9 +1203,9 @@ namespace battleship
             }
             while (Global.pcSunkenShips != 5 && Global.playerSunkenShips != 5)      //dokud nema hrac nebo pocitac vsech 5 lodi potopenych, opakuje se:
             {
-                Console.WriteLine("jste na tahu, zadejte souradnice, kam chcete vystrelit"); //informace, kdo je na tahu 
+                Console.WriteLine("Jste na tahu, zadejte souradnice, kam chcete vystrelit"); //informace, kdo je na tahu 
                 PlayerShooting(pcArrayReveal);  //strileni hrace
-                Console.WriteLine("na tahu je pocitac");
+                Console.WriteLine("Na tahu je pocitac");
                 ComputerShooting();     //strileni pocitace
             }
             if (Global.pcSunkenShips == 5)
