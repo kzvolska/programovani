@@ -16,8 +16,18 @@ namespace the_game
             public static int[] optionValue = { 20, 90, 100, 40, 50, 25, 2 };
 
         }
-        static void Crossroads()
+        static void Print(Player player)
         {
+            Console.WriteLine("Stav vaseho avatara: \nzdravi: " + player.GetHealth() + "\npenize: "
+                + player.GetMoney() + "\nhlad: " + player.GetHunger()
+                + "\nzbran: " + player.GetWeapon() + "\nvozidlo: " + player.GetVehicle());
+        }
+        static void Crossroads(Player player)
+        {
+            Console.Clear();
+            if(Global.roundCount % 2 == 0 && Global.roundCount != 0)
+            { player.Starving();}
+            Print(player);
             Console.WriteLine("Pred sebou vidite rozcesti.\nKudy se vydate dal?");
             Console.WriteLine();
             Console.WriteLine("Stisknete \n'l' pro vlevo\n'p' pro vpravo\n'r' pro rovne");
@@ -28,7 +38,20 @@ namespace the_game
                 whereNext = Console.ReadLine();
             }
             Console.Clear();
-            switch (whereNext)
+            if (whereNext == "p")
+            {
+                Console.WriteLine("Zahybate tedy doprava");
+            }
+            else if (whereNext == "l")
+            {
+                Console.WriteLine("Zahybate tedy doleva");
+            }
+            else
+            {
+                Console.WriteLine("Pokracujete tedy rovne");
+            }
+            
+            /*switch (whereNext)
             {
                 case "p":
                     Console.WriteLine("Zahybate tedy doprava");
@@ -41,8 +64,13 @@ namespace the_game
                     break;
                 default:
                     break;
-            }
+            }*/
             Global.roundCount++;
+            if (player.GetHealth() != 100)
+            {
+                player.Healing();
+            }
+
         }
         static void FoundEnemy(Player player)
         {
@@ -53,11 +81,10 @@ namespace the_game
             {
                 Wolf wolf = new Wolf(50, 5);
                 Console.WriteLine("Vlk!");
+                Print(player);
                 while (!player.IsDead() && !wolf.IsDead())
                 {
-                    player.Hurt(wolf.GetDamage());
-                    if (!player.IsDead())
-                        wolf.Hurt(player.GetDamage());
+                    Fighting(wolf, player);
                 }
             }
             else if (enemy == 2)
@@ -84,14 +111,43 @@ namespace the_game
                 Console.WriteLine("Domorodec!\nA je ozbrojen! \nZbran domorodce: " + weaponType);
                 while (!player.IsDead() && !native.IsDead())
                 {
-                    player.Hurt(native.GetDamage());
-                    if (!player.IsDead())
-                        native.Hurt(player.GetDamage());
+                    Fighting(native, player);
                 }
             }
         }
 
-        static void FoundVehicle()
+        static void Fighting (Dangers enemy, Player player)
+        {
+            Random hitOrMiss = new Random();
+            int playerHit = hitOrMiss.Next(1, 3);
+            if (playerHit == 1)
+            { player.Hurt(enemy.GetDamage()); }
+            else
+            {
+                Console.WriteLine("Odrazili jste  utok.");
+            }
+            Console.WriteLine("Jste na rade. Zautocte. \nStisknete 'u' pro utok.");
+            string attac = Console.ReadLine();
+            while (attac != "u")
+            {
+                Console.WriteLine("Stisknete 'u'");
+                attac = Console.ReadLine();
+            }
+            if (!player.IsDead())
+            {
+                Random hitOrMissWolf = new Random();
+                int enemyHit = hitOrMiss.Next(1, 3);
+                if (enemyHit == 1)
+                {
+                    enemy.Hurt(player.GetDamage());
+                }
+                else
+                {
+                    Console.WriteLine("Netrefili jste se!");
+                }
+            }
+        }
+        static void FoundVehicle(Player player)
         {
             Random rng = new Random();
             int vehicle = rng.Next(1, 4);
@@ -110,9 +166,10 @@ namespace the_game
                     case "v":
                         Car car = new Car(100);
                         int currentGasAmount = car.GetGas() ;
+                        player.SetVehicle("auto");
                         for (int i = 0; i < 4; i++)
                         {
-                            Crossroads();
+                            Crossroads(player);
                             currentGasAmount -= 25;
                             Console.WriteLine("Autu dochazi benzin. Stav benzinu: " + currentGasAmount);
                         }
@@ -139,9 +196,10 @@ namespace the_game
                     case "v":
                         Motorcycle motorcycle = new Motorcycle(100);
                         int currentGasAmount = motorcycle.GetGas();
+                        player.SetVehicle("motorka");
                         for (int i = 0; i < 2; i++)
                         {
-                            Crossroads();
+                            Crossroads(player);
                             currentGasAmount -= 50;
                             Console.WriteLine("Motorce dochazi benzin. Stav benzinu: " + currentGasAmount);
                         }
@@ -168,9 +226,10 @@ namespace the_game
                     case "v":
                         Plane plane = new Plane(100);
                         int currentGasAmount = plane.GetGas();
+                        player.SetVehicle("letadlo");
                         for (int i = 0; i < 6; i++)
                         {
-                            Crossroads();
+                            Crossroads(player);
                             currentGasAmount -= 20;
                             Console.WriteLine("Letadlu dochazi palivo. Stav paliva: " + currentGasAmount);
                         }
@@ -463,10 +522,6 @@ namespace the_game
                 "Musite byt obezretni, cestou vas muze sezrat vlk nebo skalpovat nektery domorodec.\n" +
                 "Tak tedy stastnou cestu!");
             Console.WriteLine();
-            Console.WriteLine("Stav vaseho avatara: \nzdravi: " + player.GetHealth() + "\npenize: "
-                + player.GetMoney() + "\nhlad: " + player.GetHunger()
-                + "\nzbran: " + "\nvozidlo: ");
-            Console.WriteLine();
             Console.WriteLine("Pro start cesty stisknete 's'");
             string start = Console.ReadLine();
             while (start != "s")
@@ -476,9 +531,7 @@ namespace the_game
             }
             while (!player.IsDead())
             {
-                //Console.Clear();
-                player.Starvation();
-                Crossroads();
+                Crossroads(player);
 
                 Random rng = new Random();
                 int next = 0;
@@ -497,25 +550,25 @@ namespace the_game
                 }
                 switch (next)
                 {
-                    case 1:
+                    case 0:
                         FoundEnemy(player);
                         break;
-                    case 2:
+                    case 1:
                         FoundFood(player);
                         break;
-                    case 3:
+                    case 2:
                         FoundMoney(player);
                         break;
-                    case 4:
-                        FoundVehicle();
+                    case 3:
+                        FoundVehicle(player);
                         break;
-                    case 5:
+                    case 4:
                         FoundWeapon(player);
                         break;
-                    case 6:
+                    case 5:
                         Console.WriteLine("Na tomto rozcesti vas nic neceka. Pokracujte dal");
                         break;
-                    case 7:
+                    case 6:
                         Exit(player);
                         break;
                     default:

@@ -11,7 +11,7 @@ namespace the_game
         public int health;
         public int damage;
 
-        
+
         public virtual void SetHealth(int value)
         {
             health = value;
@@ -31,11 +31,14 @@ namespace the_game
         {
             return health <= 0;
         }
+
+        public virtual void Hurt(int amount)
+        { }
     }
 
     class Wolf : Dangers
     {
-        public Wolf (int health, int damage)
+        public Wolf(int health, int damage)
         {
             SetHealth(health);
             SetDamage(damage);
@@ -48,13 +51,16 @@ namespace the_game
         {
             return base.GetDamage();
         }
-        public void Hurt(int amount)
+        public override void Hurt(int amount)
         {
             health -= amount;
-            Console.WriteLine("Zasahli jste vlka! Z jeho zivota zbyva: " + health);
             if (health <= 0)
             {
                 Console.WriteLine("Zabili jste vlka! Muzete pokracovat v ceste");
+            }
+            else
+            {
+                Console.WriteLine("Zasahli jste vlka! Z jeho zivota zbyva: " + health);
             }
         }
         public override bool IsDead()
@@ -66,19 +72,24 @@ namespace the_game
     class Native : Dangers
     {
         private string weapon;
-        public Native (int health, string weapon)
+        public Native(int health, string weapon)
         {
-            SetHealth (health);
+            SetHealth(health);
             SetWeapon(weapon);
         }
-        public void Hurt(int amount)
+        public override void Hurt(int amount)
         {
             health -= amount;
-            Console.WriteLine("Zasahli jste domorodce! Z jeho zivota zbyva: " + health);
-            if (health <= 0) 
+
+            if (health <= 0)
             {
                 Console.WriteLine("Zabili jste domorodce! Muzete pokracovat v ceste");
             }
+            else
+            {
+                Console.WriteLine("Zasahli jste domorodce! Z jeho zivota zbyva: " + health);
+            }
+
         }
 
         public void SetWeapon(string type)
@@ -113,7 +124,7 @@ namespace the_game
         {
             return base.IsDead();
         }
-    }   
+    }
 
 
 }

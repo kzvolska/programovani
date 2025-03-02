@@ -33,6 +33,14 @@ namespace the_game
         {
             return vehicleNumber;
         }
+        public void SetVehicle(string vehicleType)
+        {
+            vehicle = vehicleType;
+        }
+        public string GetVehicle()
+        {
+            return vehicle;
+        }
         public void FoundVehicle(string vehicleType)
         {
             vehicleNumber++;
@@ -86,17 +94,19 @@ namespace the_game
         {
             hunger = 0;
         }
-        public void Starvation()
+        public void Starving()
         {
             hunger += 5;
             if (hunger >= 50)
             {
                 Console.WriteLine("Vas avatar vyhladovel! \nGAME OVER!");
             }
-            else
-                Console.WriteLine("Vas avatar hladovi. Snad brzy najdete nejake jidlo.");
         }
 
+        public void Healing()
+        {
+            health += 5;
+        }
         public void SetWeapon(string weaponType)
         {
             weapon = weaponType;
