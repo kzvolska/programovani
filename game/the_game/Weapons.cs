@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace the_game
 {
-    internal class Weapons
+    internal class Weapons //zbrane maji pocet naboju (puska a samopal) a damage, kterou pusobi
     {
         private int bullets;
-        private int usage;
         private int damage;
 
         public virtual void SetBullets (int number)
@@ -21,15 +20,6 @@ namespace the_game
             return bullets;
         }
 
-        public virtual void SetUsage(int number)
-        {
-            usage = number;
-        }
-        public virtual int GetUsage ()
-        {
-            return usage;
-        }
-
         public virtual void SetDamage(int number)
         {
             damage = number;
@@ -37,6 +27,14 @@ namespace the_game
         public virtual int GetDamage()
         {
             return damage;
+        }
+        public virtual void Firing()
+        {
+            bullets--;
+        }
+        public virtual void Loading()
+        {
+            bullets += 15;
         }
     }
 
@@ -47,6 +45,10 @@ namespace the_game
             SetBullets (bullets);
             SetDamage (damage);
         }
+        public override int GetBullets()
+        {
+            return base.GetBullets ();
+        }
     }
     class MachineGun : Weapons 
     {
@@ -54,6 +56,10 @@ namespace the_game
         {
             SetBullets(bullets);
             SetDamage(damage);
+        }
+        public override int GetBullets()
+        {
+            return base.GetBullets();
         }
     }
     class Knife : Weapons 
@@ -69,6 +75,7 @@ namespace the_game
         {
             SetDamage(damage);
         }
+
     }
 
 }

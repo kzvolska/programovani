@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace the_game
 {
-    internal class Dangers
+    internal class Dangers //vlk a domorodec maji zdravi a damage, kterou pusobi (u domorodce zalezi na zbrani)
     {
         public int health;
         public int damage;

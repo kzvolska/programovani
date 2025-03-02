@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace the_game
 {
-    internal class Player
+    internal class Player //hrac ma zdravi, penize, uroven hladu, damage, kteoru pusobi, pocet dopr. prostr., pocet zbrani, konkretni zbran a dopr. prostr.
     {
         private int health;
         private int money;
@@ -17,13 +17,14 @@ namespace the_game
         private string weapon;
         private string vehicle;
 
-        public Player (int health, int money, int hunger, int vehicleNumber, int weaponNumber)
+        public Player (int health, int money, int hunger, int vehicleNumber, int weaponNumber, int damage)
         {
             SetHealth (health);
             SetMoney (money);
             SetHunger (hunger);
             SetVehicleNumber (vehicleNumber);
             SetWeaponNumber (weaponNumber);
+            SetDamage (damage);
         }
         public void SetVehicleNumber(int number)
         {
@@ -78,8 +79,7 @@ namespace the_game
         public int GetMoney() { return money; }
         public void FoundMoney ()
         {
-            money += 10;
-            Console.WriteLine("Stav vaseho avatara: \npenize: " +  money);
+            money += 35;
         }
         public void Buying(int amount)
         {
@@ -94,7 +94,7 @@ namespace the_game
         {
             hunger = 0;
         }
-        public void Starving()
+        public void Starving() //pokud hlad vice ney 50 -> konec hry
         {
             hunger += 5;
             if (hunger >= 50)
@@ -114,29 +114,12 @@ namespace the_game
         public string GetWeapon()
         { return weapon; }
 
-        public void SetDamage()
+        public void SetDamage(int amount)
         {
-            if (weapon == "pistole")
-            {
-                damage = 20;
-            }
-            else if (weapon == "nuz")
-            {
-                damage = 15;
-            }
-            else if (weapon == "samopal")
-            {
-                damage = 50;
-            }
-            else if (weapon == "granat")
-            {
-                damage = 100;
-            }
-            else damage = 10;
+            damage = amount;
         }
         public int GetDamage()
         {
-            SetDamage();
             return damage;
         }
         public void Hurt(int amount)

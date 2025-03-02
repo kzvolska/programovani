@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace the_game
 {
-    internal class Vehicles
+    internal class Vehicles //dopr. prostr. maji nadrz benzinu, kteoru vypotrebovavaji
     {
         private int gas;
         
